@@ -110,8 +110,8 @@
 
   <div class="container">
     <div class="card">
-      <h2>MurderMystery 2</h2>
-      <button onclick="copyToClipboard('Script for MurderMystery 2', this)">Copy Script</button>
+      <h2>MurderMystery</h2>
+      <button onclick="copyToClipboard('Script for MurderMystery', this)">Copy Script</button>
     </div>
     <div class="card">
       <h2>Grow A Garden</h2>
@@ -132,27 +132,33 @@
   </div>
 
   <script>
+    let isNotificationVisible = false;
+
     function copyToClipboard(text, button) {
+      // 如果正在显示通知，就延迟执行（排队机制）
+      if (isNotificationVisible) return;
+
       navigator.clipboard.writeText(text).then(function () {
-        // 放大动画
         const card = button.closest('.card');
         card.style.transform = 'scale(1.08)';
         setTimeout(() => {
           card.style.transform = 'scale(1)';
         }, 150);
 
-        // 按钮绿光字效果
+        // 按钮发光效果更快（0.6 秒）
         button.classList.add('green-glow');
         setTimeout(() => {
           button.classList.remove('green-glow');
-        }, 1500);
+        }, 600);
 
-        // 顶部提示
+        // 通知处理（单个显示完才允许下一个）
         const notification = document.getElementById('notification');
+        isNotificationVisible = true;
         notification.classList.add('show');
         setTimeout(() => {
           notification.classList.remove('show');
-        }, 1500);
+          isNotificationVisible = false;
+        }, 1000);
       });
     }
   </script>
