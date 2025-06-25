@@ -3,17 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stylish Script Cards</title>
+  <title>Script Cards</title>
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       background: linear-gradient(to bottom right, #000000, #8B0000);
       color: #fff;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .notification {
+      position: fixed;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #222;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: top 0.4s ease, opacity 0.4s ease;
+      z-index: 999;
+    }
+
+    .notification.show {
+      top: 20px;
+      opacity: 1;
     }
 
     .container {
@@ -21,59 +42,57 @@
       flex-wrap: wrap;
       justify-content: center;
       padding: 40px 20px;
-      gap: 24px;
+      gap: 18px;
     }
 
     .card {
-      background-color: rgba(0, 0, 0, 0.4); /* 半透明黑 */
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-      width: 240px;
-      padding: 24px 20px;
+      background-color: rgba(0, 0, 0, 0.45);
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+      width: 180px;
+      padding: 18px 14px;
       text-align: center;
-      backdrop-filter: blur(6px); /* 玻璃模糊 */
+      backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
+      transition: transform 0.2s ease;
     }
 
     .card h2 {
-      font-size: 1.5em;
-      margin-bottom: 20px;
+      font-size: 1.3em;
+      margin-bottom: 18px;
       color: #fff;
-      text-shadow: 0 0 10px rgba(255, 50, 50, 0.8),
-                   0 0 20px rgba(255, 0, 0, 0.6);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.9),
+                   0 0 14px rgba(255, 255, 255, 0.6);
     }
 
     .card button {
       background-color: #8B0000;
       color: #fff;
       border: none;
-      padding: 14px 30px;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
+      padding: 12px 0;
       width: 100%;
+      border-radius: 10px;
+      font-size: 0.95em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
 
     .card button:hover {
       background-color: #ff0000;
-      transform: scale(1.03);
     }
 
     @media (max-width: 600px) {
       .card {
-        width: 90%;
+        width: 85%;
       }
     }
   </style>
 </head>
 <body>
+
+  <div class="notification" id="notification">Copied to clipboard!</div>
+
   <div class="container">
     <div class="card">
       <h2>MurderMystery 2</h2>
@@ -100,15 +119,22 @@
   <script>
     function copyToClipboard(text, button) {
       navigator.clipboard.writeText(text).then(function () {
-        const originalText = button.innerText;
-        button.innerText = "Copied!";
-        button.disabled = true;
+        // 按钮动画：卡片暂时放大后缩小
+        const card = button.closest('.card');
+        card.style.transform = 'scale(1.08)';
         setTimeout(() => {
-          button.innerText = originalText;
-          button.disabled = false;
+          card.style.transform = 'scale(1)';
+        }, 150);
+
+        // 弹出通知
+        const notification = document.getElementById('notification');
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
         }, 1500);
       });
     }
   </script>
+
 </body>
 </html>
