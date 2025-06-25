@@ -25,7 +25,7 @@
       color: #00ff88;
       padding: 12px 28px;
       border-radius: 8px;
-      box-shadow: 0 0 15px #00ff88, 0 0 5px #00ff88;
+      box-shadow: 0 0 18px #00ff88, 0 0 6px #00ff88;
       font-size: 1em;
       white-space: nowrap;
       opacity: 0;
@@ -62,34 +62,34 @@
     }
 
     .card h2 {
-      font-size: 1.9em;
+      font-size: 2em;
       margin-bottom: 18px;
       color: #ffffff;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 1),
-                   0 0 20px rgba(255, 255, 255, 0.85);
+      text-shadow: 0 0 14px rgba(255, 255, 255, 1),
+                   0 0 26px rgba(255, 255, 255, 0.95);
     }
 
     .card button {
-      background-color: #8B0000;
-      color: #fff;
+      background-color: #555555;
+      color: #ffffff;
       border: none;
-      padding: 14px 0;
+      padding: 16px 0;
       width: 100%;
       border-radius: 10px;
-      font-size: 1em;
+      font-size: 1.2em;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.2s ease, transform 0.15s ease, color 0.15s ease, text-shadow 0.2s ease;
-      text-shadow: 0 0 8px #ffffff, 0 0 12px #ffffff;
+      text-shadow: 0 0 10px #ffffff, 0 0 18px #ffffff, 0 0 26px #ffffff;
     }
 
     .card button.green-glow {
       color: #00ff88 !important;
-      text-shadow: 0 0 12px #00ff88, 0 0 20px #00ff88;
+      text-shadow: 0 0 14px #00ff88, 0 0 24px #00ff88, 0 0 34px #00ff88;
     }
 
     .card button:hover {
-      background-color: #ff0000;
+      background-color: #666666;
     }
 
     @media (max-width: 600px) {
@@ -134,20 +134,20 @@
   <script>
     function copyToClipboard(text, button) {
       navigator.clipboard.writeText(text).then(function () {
-        // 卡片缩放动画
+        // 放大动画
         const card = button.closest('.card');
         card.style.transform = 'scale(1.08)';
         setTimeout(() => {
           card.style.transform = 'scale(1)';
         }, 150);
 
-        // 按钮文字变绿光
+        // 按钮绿光字效果
         button.classList.add('green-glow');
         setTimeout(() => {
           button.classList.remove('green-glow');
         }, 1500);
 
-        // 弹窗通知
+        // 顶部提示
         const notification = document.getElementById('notification');
         notification.classList.add('show');
         setTimeout(() => {
