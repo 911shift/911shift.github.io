@@ -111,23 +111,23 @@
   <div class="container">
     <div class="card">
       <h2>MurderMystery</h2>
-      <button onclick="copyToClipboard('Script for MurderMystery', this)">Copy Script</button>
+      <button onclick="copyToClipboard(`loadstring(game:HttpGet('https://raw.githubusercontent.com/Ankazcx/Loader/main/MurderMystery%202'))()`, this)">Copy Script</button>
     </div>
     <div class="card">
       <h2>Grow A Garden</h2>
-      <button onclick="copyToClipboard('Script for Grow A Garden', this)">Copy Script</button>
+      <button onclick="copyToClipboard(`loadstring(game:HttpGet('https://raw.githubusercontent.com/Ankazcx/Loader/refs/heads/main/GrowAGarden'))()`, this)">Copy Script</button>
     </div>
     <div class="card">
       <h2>Adopt Me</h2>
-      <button onclick="copyToClipboard('Script for Adopt Me', this)">Copy Script</button>
+      <button onclick="copyToClipboard(`loadstring(game:HttpGet('https://raw.githubusercontent.com/Ankazcx/Loader/main/AdoptMe'))()`, this)">Copy Script</button>
     </div>
     <div class="card">
       <h2>Pet Simulator 99</h2>
-      <button onclick="copyToClipboard('Script for Pet Simulator 99', this)">Copy Script</button>
+      <button onclick="copyToClipboard(`loadstring(game:HttpGet('https://raw.githubusercontent.com/Ankazcx/Loader/main/PetSimulator99'))()`, this)">Copy Script</button>
     </div>
     <div class="card">
       <h2>Pets Go</h2>
-      <button onclick="copyToClipboard('Script for Pets Go', this)">Copy Script</button>
+      <button onclick="copyToClipboard(`loadstring(game:HttpGet('https://raw.githubusercontent.com/Ankazcx/Loader/main/PetsGo'))()`, this)">Copy Script</button>
     </div>
   </div>
 
@@ -135,7 +135,6 @@
     let isNotificationVisible = false;
 
     function copyToClipboard(text, button) {
-      // 如果正在显示通知，就延迟执行（排队机制）
       if (isNotificationVisible) return;
 
       navigator.clipboard.writeText(text).then(function () {
@@ -145,13 +144,11 @@
           card.style.transform = 'scale(1)';
         }, 150);
 
-        // 按钮发光效果更快（0.6 秒）
         button.classList.add('green-glow');
         setTimeout(() => {
           button.classList.remove('green-glow');
         }, 600);
 
-        // 通知处理（单个显示完才允许下一个）
         const notification = document.getElementById('notification');
         isNotificationVisible = true;
         notification.classList.add('show');
